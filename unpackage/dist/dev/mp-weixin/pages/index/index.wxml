@@ -1,0 +1,1 @@
+<view><ss-top-bar vue-id="8dd740cc-1" bind:__l="__l"></ss-top-bar><text>首页</text><ss-go-top vue-id="8dd740cc-2" bind:__l="__l"></ss-go-top></view>

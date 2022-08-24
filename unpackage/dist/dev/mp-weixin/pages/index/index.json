@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "首页",
+  "navigationStyle": "custom",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "ss-top-bar": "/components/ssTopBar/ssTopBar",
+    "ss-go-top": "/components/ssGoTop/ssGoTop"
+  }
+}

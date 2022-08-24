@@ -1,0 +1,1 @@
+<view data-event-opts="{{[['tap',[['go',['$event']]]]]}}" class="go-top" bindtap="__e"><uni-icons vue-id="59046534-1" type="arrow-up" size="30" color="#666" bind:__l="__l"></uni-icons></view>
