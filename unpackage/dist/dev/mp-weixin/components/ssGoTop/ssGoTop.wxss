@@ -25,6 +25,7 @@
 /* 透明度 */
 /* 文章场景相关 */
 .go-top {
+  z-index: 10;
   position: fixed;
   right: 15rpx;
   bottom: 150rpx;

@@ -3,7 +3,7 @@
   "navigationStyle": "custom",
   "enablePullDownRefresh": true,
   "usingComponents": {
-    "ss-top-bar": "/components/ssTopBar/ssTopBar",
-    "ss-go-top": "/components/ssGoTop/ssGoTop"
+    "ss-go-top": "/components/ssGoTop/ssGoTop",
+    "uni-card": "/uni_modules/uni-card/components/uni-card/uni-card"
   }
 }

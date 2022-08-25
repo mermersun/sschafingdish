@@ -17,16 +17,16 @@
 		<!-- 选择栏 -->
 		<view class="choose">
 			<view>
-				<text class="active">综合</text>
+				<text @click="synthesize" :class="{active:activenum==1}">综合</text>
 			</view>
 			<view>
-				<text>销量</text>
+				<text @click="sale" :class="{active:activenum==2}">销量</text>
 			</view>
 			<view>
-				<text>价格</text>
+				<text @click="price" :class="{active:activenum==3}">价格</text>
 			</view>
 			<view>
-				<text>新品</text>
+				<text @click="fnew" :class="{active:activenum==4}">新品</text>
 			</view>
 		</view>
 		<!-- 内容 -->
@@ -39,8 +39,8 @@
 					<view>
 						<text>{{item.name}}</text>
 						<view>
+							<text>￥{{item.price|num}}</text>
 							<text>￥{{item.orprice}}</text>
-							<text>￥{{item.price}}</text>
 						</view>
 					</view>
 					<image src="../../static/img/add.png" mode="widthFix"></image>
@@ -52,6 +52,15 @@
 
 <script>
 	import {
+		foodsNew
+	} from '@/service/index.js'
+	import {
+		foodsPrice
+	} from '@/service/index.js'
+	import {
+		foodsSale
+	} from '@/service/index.js'
+	import {
 		foods
 	} from '@/service/index.js'
 	import {
@@ -60,15 +69,23 @@
 	export default {
 		data() {
 			return {
-				foodList: [], //菜品
+				activenum: 1, //激活标签
+				foodList: [], //所有菜品
 				foodLikeList: [], //查询菜品
 			}
 		},
 		async onLoad() {
 			//加载所有菜品
 			let res = await foods()
-			console.log('菜品', res);
+			console.log('所有菜品', res);
 			this.foodList = res.data
+		},
+		filters: {
+			num: function(value) {
+				if (!isNaN(value)) {
+					return ((value + '').indexOf('.') != -1) ? value : value.toFixed(2);
+				}
+			}
 		},
 		methods: {
 			//失去焦点和点击消除
@@ -102,7 +119,35 @@
 						title: '没有查询到相关菜品'
 					})
 				}
-			}
+			},
+			//综合排序
+			async synthesize() {
+				let res = await foods()
+				console.log('综合菜品', res);
+				this.foodList = res.data
+				this.activenum = 1
+			},
+			//销量排序
+			async sale() {
+				let res = await foodsSale()
+				console.log('销量排序', res);
+				this.foodList = res.data
+				this.activenum = 2
+			},
+			//价格排序
+			async price() {
+				let res = await foodsPrice()
+				console.log('价格排序', res);
+				this.foodList = res.data
+				this.activenum = 3
+			},
+			//新品
+			async fnew() {
+				let res = await foodsNew()
+				console.log('新品', res);
+				this.foodList = res.data
+				this.activenum = 4
+			},
 		}
 	}
 </script>
@@ -144,7 +189,6 @@
 			}
 		}
 	}
-
 
 	.content {
 		display: flex;

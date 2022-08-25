@@ -16,8 +16,8 @@
 			//回到顶部
 			go() {
 				uni.pageScrollTo({
-					scrollTop:0,
-					duration:300
+					scrollTop: 0,
+					duration: 300
 				})
 			}
 		},
@@ -26,6 +26,7 @@
 
 <style lang="scss">
 	.go-top {
+		z-index: 10;
 		position: fixed;
 		right: 15rpx;
 		bottom: 150rpx;
@@ -33,6 +34,7 @@
 		border-radius: $ss-border-radius-circle;
 		background-color: #fff;
 		opacity: $ss-opacity-disabled + 0.4;
+
 		&:active {
 			opacity: 1;
 		}

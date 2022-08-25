@@ -1,6 +1,6 @@
 <template>
 	<view>
-		菜品详情
+		详情
 	</view>
 </template>
 
@@ -8,15 +8,18 @@
 	export default {
 		data() {
 			return {
-				
+
 			}
 		},
+		onLoad() {
+
+		},
 		methods: {
-			
+
 		}
 	}
 </script>
 
-<style>
+<style lang="scss">
 
 </style>

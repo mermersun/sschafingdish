@@ -61,7 +61,7 @@
 
 	.content {
 		position: absolute;
-		top: 50rpx;
+		top: 30rpx;
 		left: 25rpx;
 		width: 700rpx;
 		box-shadow: 0 0 15rpx #ddd;
@@ -127,8 +127,8 @@
 	}
 
 	.bottom {
-		position: fixed;
-		bottom: 100rpx;
+		position: absolute;
+		bottom: 0px;
 		display: flex;
 		align-items: center;
 		box-shadow: 0 0 15rpx #ddd;

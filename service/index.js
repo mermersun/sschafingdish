@@ -44,3 +44,81 @@ export let foodsLike = async function(name) {
 	uni.hideLoading()
 	return result[1].data
 }
+
+// API 销量排序
+export let foodsSale = async function() {
+	let url = base + 'foods/sale'
+
+	uni.showLoading({
+		title: '加载中...'
+	})
+	//发起异步数据请求
+	let result = await uni.request({
+		url
+	})
+	uni.hideLoading()
+	return result[1].data
+}
+
+// API 价格排序
+export let foodsPrice = async function() {
+	let url = base + 'foods/price'
+
+	uni.showLoading({
+		title: '加载中...'
+	})
+	//发起异步数据请求
+	let result = await uni.request({
+		url
+	})
+	uni.hideLoading()
+	return result[1].data
+}
+
+// API 新品
+export let foodsNew = async function() {
+	let url = base + 'foods/new'
+
+	uni.showLoading({
+		title: '加载中...'
+	})
+	//发起异步数据请求
+	let result = await uni.request({
+		url
+	})
+	uni.hideLoading()
+	return result[1].data
+}
+
+// API 推荐
+export let foodsRecommend = async function() {
+	let url = base + 'foods/recommend'
+
+	uni.showLoading({
+		title: '加载中...'
+	})
+	//发起异步数据请求
+	let result = await uni.request({
+		url
+	})
+	uni.hideLoading()
+	return result[1].data
+}
+
+// API 类型
+export let foodsType = async function(type) {
+	let url = base + 'foods/type'
+
+	uni.showLoading({
+		title: '加载中...'
+	})
+	//发起异步数据请求
+	let result = await uni.request({
+		url,
+		data: {
+			type
+		}
+	})
+	uni.hideLoading()
+	return result[1].data
+}

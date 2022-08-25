@@ -41,7 +41,6 @@
 }
 .top > view:first-child > image:first-child {
   width: 160rpx;
-  height: 160rpx;
   border-radius: 50%;
 }
 .top > view:first-child > view {
@@ -50,11 +49,9 @@
 }
 .top > view:first-child > view > text {
   padding: 8rpx;
-  font-size: 1.3em;
 }
 .top > view:first-child > image:last-child {
   width: 55rpx;
-  height: 55rpx;
 }
 .top > view:last-child {
   display: flex;
@@ -76,12 +73,12 @@
 }
 .content {
   height: 640rpx;
-  padding: 0 30rpx;
 }
 .content > view:first-child {
   display: flex;
   justify-content: space-between;
   line-height: 80rpx;
+  padding: 0 30rpx;
 }
 .content > view:first-child > text {
   font-weight: bold;
@@ -97,39 +94,40 @@
 }
 .content > view:first-child > view > image {
   width: 25rpx;
-  height: 25rpx;
 }
 .content > view:nth-child(2) {
   display: flex;
-  justify-content: space-evenly;
 }
 .content > view:nth-child(2) > view {
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 .content > view:nth-child(2) > view > text {
   font-size: 12px;
-  padding: 5rpx 45rpx;
 }
 .content > view:nth-child(2) > view > image {
   width: 80rpx;
-  height: 80rpx;
 }
 .content > view:last-child > text {
   font-weight: bold;
   color: #000;
   line-height: 80rpx;
+  padding: 0 30rpx;
 }
 .content > view:last-child > view {
-  line-height: 80rpx;
+  line-height: 90rpx;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 30rpx;
+}
+.content > view:last-child > view:active {
+  background-color: #eee;
 }
 .content > view:last-child > view > image:first-child {
   width: 45rpx;
-  height: 45rpx;
   margin-right: 20rpx;
 }
 .content > view:last-child > view > text {
@@ -138,6 +136,5 @@
 }
 .content > view:last-child > view > image:last-child {
   width: 25rpx;
-  height: 25rpx;
 }
 
