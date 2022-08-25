@@ -21,7 +21,26 @@ export let foods = async function() {
 	})
 	//发起异步数据请求
 	let result = await uni.request({
-		url
+		url,
+	})
+	uni.hideLoading()
+	return result[1].data
+}
+
+// API 点餐列表-综合（分页）
+export let foodsFy = async function(page) {
+	let url = base + 'foods/fy'
+
+	uni.showLoading({
+		title: '加载中...'
+	})
+	//发起异步数据请求
+	let result = await uni.request({
+		url,
+		...post,
+		data: {
+			page
+		}
 	})
 	uni.hideLoading()
 	return result[1].data

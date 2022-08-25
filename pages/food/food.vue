@@ -17,7 +17,7 @@
 		<!-- 选择栏 -->
 		<view class="choose">
 			<view>
-				<text @click="synthesize" :class="{active:activenum==1}">综合</text>
+				<text @click="choosesynthesize" :class="{active:activenum==1}">综合</text>
 			</view>
 			<view>
 				<text @click="sale" :class="{active:activenum==2}">销量</text>
@@ -47,10 +47,15 @@
 				</view>
 			</view>
 		</view>
+		<!-- 没有更多数据了 -->
+		<uni-load-more :status="isLoading ? 'loading' : (hasMore ? 'more' : 'noMore')" />
 	</view>
 </template>
 
 <script>
+	import {
+		foodsFy
+	} from '@/service/index.js'
 	import {
 		foodsNew
 	} from '@/service/index.js'
@@ -70,15 +75,29 @@
 		data() {
 			return {
 				activenum: 1, //激活标签
-				foodList: [], //所有菜品
+				foodList: [], //分页加载菜品
 				foodLikeList: [], //查询菜品
+				page: 0, //当前加载到哪一页了
+				isLoading: false, //当前是否正在加载下一页数据
+				hasMore: true, //还有更多数据可供加载吗
 			}
 		},
-		async onLoad() {
+		onLoad() {
 			//加载所有菜品
-			let res = await foods()
-			console.log('所有菜品', res);
-			this.foodList = res.data
+			this.synthesize()
+		},
+		onReachBottom() {
+			this.synthesize()
+		},
+		async onPullDownRefresh() { //生命周期方法：页面顶部下拉刷新
+			//console.log('用户在页面顶部下拉刷新了');
+			//刷新：丢弃当前已经查询的所有数据，重新加载第1页
+			this.page = 0 //当前加载到第0页了
+			this.foodList = [] //清除之前已经加载的所有数据
+			this.hasMore = true //当前还有更多数据可供加载
+			await this.synthesize() //开始加载下一页数据——调用情形③
+			//等到新数据加载完成，隐藏掉页面顶部“加载中”动画
+			uni.stopPullDownRefresh()
 		},
 		filters: {
 			num: function(value) {
@@ -121,11 +140,33 @@
 				}
 			},
 			//综合排序
-			async synthesize() {
+			async choosesynthesize() {
 				let res = await foods()
-				console.log('综合菜品', res);
+				console.log('综合排序', res);
 				this.foodList = res.data
+			},
+			//分页加载菜品
+			async synthesize() {
 				this.activenum = 1
+				if (!this.hasMore || this.isLoading) {
+					return //如果“没有更多数据”或者“当前正在加载中”，就不要继续加载了
+				}
+				// //开始加载下一页数据
+				this.isLoading = true //开始加载....
+				let page = this.page + 1 //此处没有使用this.page++；无需修改this.page
+				let res = await foodsFy(page)
+				console.log('分页加载菜品', res);
+				if (res.data.result.length > 0) { //只要此次查询到了数据，就应该保存下来
+					this.foodList = [...this.foodList, ...res.data.result] //在已经加载的数据尾部追加新拿到的数据
+				}
+				if (res.data.page < res.data.pageCount) { //当前页号还小于总页数
+					this.hasMore = true //还有更多数据可供加载
+					this.page = res.data.page
+				} else { //当前页号已经大于或等于总页数
+					this.hasMore = false //没有更多数据了
+					this.page = res.data.page
+				}
+				this.isLoading = false //加载完毕
 			},
 			//销量排序
 			async sale() {
@@ -194,9 +235,7 @@
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: space-between;
-		padding: 30rpx;
-		overflow-y: scroll;
-		height: 1000rpx;
+		padding: 30rpx 30rpx 0 30rpx;
 
 		&>view {
 			margin-bottom: 50rpx;

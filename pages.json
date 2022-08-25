@@ -6,8 +6,7 @@
 				//导航条标题文本
 				"navigationBarTitleText": "首页",
 				//导航条样式为自定义,就是取消导航条
-				"navigationStyle": "custom",
-				"enablePullDownRefresh": true
+				"navigationStyle": "custom"
 			}
 		}, {
 			"path": "pages/food/food",
@@ -15,7 +14,9 @@
 				"navigationBarTitleText": "菜品分类",
 				"navigationBarTextStyle": "black",
 				"navigationBarBackgroundColor": "#fff",
-				"backgroundColor": "#fff"
+				"backgroundColor": "#fff",
+				"enablePullDownRefresh": true,
+				"onReachBottomDistance": 20
 			}
 
 		}, {
