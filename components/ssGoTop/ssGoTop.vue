@@ -28,7 +28,7 @@
 	.go-top {
 		z-index: 10;
 		position: fixed;
-		right: 15rpx;
+		right: 20rpx;
 		bottom: 150rpx;
 		border: 1px solid $ss-border-color;
 		border-radius: $ss-border-radius-circle;

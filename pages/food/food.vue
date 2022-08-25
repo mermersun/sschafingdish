@@ -1,5 +1,6 @@
 <template>
 	<view>
+		<ssGoTop></ssGoTop>
 		<!-- 搜索栏 -->
 		<view class="search-bar">
 			<!-- 搜索框 -->
