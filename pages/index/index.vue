@@ -5,25 +5,26 @@
 		<text class="title">涮涮餐饮</text>
 		<!-- 横向滚动内容 -->
 		<view class="top">
-			<scroll-view scroll-x="true" class="scroll">
-				<view class="scroll-item" v-for="item in foodAllList" :key="item.id">
+			<scroll-view scroll-x="true" class="scroll" scroll-anchoring>
+				<view class="scroll-item" v-for="(item,index) in foodAllList" :key="item.id">
 					<uni-card margin="0">
-						<view class="pic">
+						<view @click="goDetail(item.name)" class="pic">
 							<image class="tp" :src="$URL+item.picture" mode="scaleToFill"></image>
 						</view>
 						<view class="bottom">
-							<view>
+							<view @click="goDetail(item.name)">
 								<text>{{item.name}}</text>
 								<view>
 									<text>{{item.min}} - {{item.max}}人</text>
 									<text>月销量：{{item.sale}}</text>
 								</view>
 								<view>
-									<text>￥{{item.price}}</text>
+									<text>￥{{item.price|num}}</text>
 									<text>￥{{item.orprice}}</text>
 								</view>
 							</view>
-							<image class="add" src="../../static/img/add.png" mode="widthFix"></image>
+							<image @click="buttonClick(index,item.name)" class="add" src="../../static/img/add.png"
+								mode="widthFix"></image>
 						</view>
 					</uni-card>
 				</view>
@@ -71,19 +72,19 @@
 		</view>
 		<!-- 内容 -->
 		<view class="content">
-			<view v-for="item in foodList" :key="item.id">
-				<view>
+			<view v-for="(item,index) in foodList" :key="item.id">
+				<view @click="goDetail(item.name)">
 					<image :src="$URL+item.picture" mode=""></image>
 				</view>
 				<view>
-					<view>
+					<view @click="goDetail(item.name)">
 						<text>{{item.name}}</text>
 						<view>
-							<text>￥{{item.price}}</text>
+							<text>￥{{item.price|num}}</text>
 							<text>￥{{item.orprice}}</text>
 						</view>
 					</view>
-					<image src="../../static/img/add.png" mode="widthFix"></image>
+					<image @click="buttonClick(index,item.name)" src="../../static/img/add.png" mode="widthFix"></image>
 				</view>
 			</view>
 		</view>
@@ -91,6 +92,15 @@
 </template>
 
 <script>
+	import {
+		foodUpdate
+	} from '@/service/index.js'
+	import {
+		IsShopName
+	} from '@/service/index.js'
+	import {
+		foodAdd
+	} from '@/service/index.js'
 	import {
 		foodsType
 	} from '@/service/index.js'
@@ -115,7 +125,43 @@
 			console.log('所有菜品', res);
 			this.foodAllList = res.data
 		},
+		filters: {
+			num: function(value) {
+				if (!isNaN(value)) {
+					return ((value + '').indexOf('.') != -1) ? value : value.toFixed(2);
+				}
+			}
+		},
 		methods: {
+			//点击加入购物车
+			async buttonClick(index, name) {
+				//通过商品名称查询是否存在该商品
+				let result = await IsShopName(name)
+				console.log('通过商品名称查询是否存在该商品', result);
+				if (result.data.length) {
+					let count = result.data[0].count + 1
+					let res = await foodUpdate(name, count++)
+					uni.showToast({
+						title: '添加成功',
+						icon: "none"
+					})
+				} else {
+					let res = await foodAdd(this.foodList[index].picture, this.foodList[index].name, this.foodList[
+							index]
+						.price, this
+						.foodList[index].orprice, this.foodList[index].tagline, 1)
+					console.log('点击加入购物车', res);
+				}
+			},
+
+			//点击跳转到详情页
+			goDetail(name) {
+				uni.navigateTo({
+					url: '/pages/foodDetail/foodDetail?name=' + name
+				})
+				// console.log(id);
+			},
+			//显示无套餐
 			empty() {
 				uni.showToast({
 					title: '暂无套餐',

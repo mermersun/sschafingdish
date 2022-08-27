@@ -43,8 +43,9 @@
 		}, {
 			"path": "pages/foodDetail/foodDetail",
 			"style": {
-				"navigationBarTitleText": "菜品详情",
 				"enablePullDownRefresh": false
+				// "navigationBarBackgroundColor": "#fff",
+				// "navigationBarTextStyle": "black"
 			}
 
 		}

@@ -11,7 +11,7 @@
 			<view class="search-list">
 				<uni-list>
 					<uni-list-item v-for="item in foodLikeList" :key="item.id" :title="item.name" link
-						:thumb="$URL+item.picture" :to="'/pages/foodDetail/foodDetail?id='+item.id" />
+						:thumb="$URL+item.picture" :to="'/pages/foodDetail/foodDetail?name='+item.name" />
 				</uni-list>
 			</view>
 		</view>
@@ -32,19 +32,19 @@
 		</view>
 		<!-- 内容 -->
 		<view class="content">
-			<view v-for="item in foodList" :key="item.id">
-				<view>
+			<view v-for="(item,index) in foodList" :key="item.id">
+				<view @click="goDetail(item.name)">
 					<image :src="$URL+item.picture" mode=""></image>
 				</view>
 				<view>
-					<view>
+					<view @click="goDetail(item.name)">
 						<text>{{item.name}}</text>
 						<view>
 							<text>￥{{item.price|num}}</text>
 							<text>￥{{item.orprice}}</text>
 						</view>
 					</view>
-					<image src="../../static/img/add.png" mode="widthFix"></image>
+					<image @click="buttonClick(index,item.name)" src="../../static/img/add.png" mode="widthFix"></image>
 				</view>
 			</view>
 		</view>
@@ -54,6 +54,15 @@
 </template>
 
 <script>
+	import {
+		foodUpdate
+	} from '@/service/index.js'
+	import {
+		IsShopName
+	} from '@/service/index.js'
+	import {
+		foodAdd
+	} from '@/service/index.js'
 	import {
 		foodsFy
 	} from '@/service/index.js'
@@ -108,7 +117,34 @@
 			}
 		},
 		methods: {
-			//失去焦点和点击消除
+			//点击加入购物车
+			async buttonClick(index, name) {
+				//通过商品名称查询是否存在该商品
+				let result = await IsShopName(name)
+				console.log('通过商品名称查询是否存在该商品', result);
+				if (result.data.length) {
+					let count = result.data[0].count + 1
+					let res = await foodUpdate(name, count++)
+					uni.showToast({
+						title: '添加成功',
+						icon: "none"
+					})
+				} else {
+					let res = await foodAdd(this.foodList[index].picture, this.foodList[index].name, this.foodList[
+							index]
+						.price, this
+						.foodList[index].orprice, this.foodList[index].tagline, 1)
+					console.log('点击加入购物车', res);
+				}
+			},
+			//点击跳转到详情页
+			goDetail(name) {
+				uni.navigateTo({
+					url: '/pages/foodDetail/foodDetail?name=' + name
+				})
+				// console.log(id);
+			},
+			//点击消除
 			clearList() {
 				this.foodLikeList = []
 			},

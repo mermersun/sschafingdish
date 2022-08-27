@@ -141,3 +141,157 @@ export let foodsType = async function(type) {
 	uni.hideLoading()
 	return result[1].data
 }
+
+// API 根据菜品id查询菜品详情
+export let foodsDetail = async function(id) {
+	let url = base + 'food/detail'
+
+	uni.showLoading({
+		title: '加载中...'
+	})
+	//发起异步数据请求
+	let result = await uni.request({
+		url,
+		...post,
+		data: {
+			id
+		}
+	})
+	uni.hideLoading()
+	return result[1].data
+}
+
+// API 购物车增加第一个商品
+export let foodAdd = async function(picture, name, price, orprice, tagline, count) {
+	let url = base + 'food/add'
+	//发起异步数据请求
+	let result = await uni.request({
+		url,
+		...post,
+		data: {
+			picture,
+			name,
+			price,
+			orprice,
+			tagline,
+			count
+		}
+	})
+	uni.showToast({
+		title: '添加成功',
+		icon: "none"
+	})
+	return result[1].data
+}
+
+// API 购物车查询所有菜品
+export let foodsShopping = async function() {
+	let url = base + 'foods/shopping'
+
+	uni.showLoading({
+		title: '加载中...'
+	})
+	//发起异步数据请求
+	let result = await uni.request({
+		url,
+	})
+	uni.hideLoading()
+	return result[1].data
+}
+
+// API 查询购物车菜品数量
+export let shoppingCount = async function() {
+	let url = base + 'shopping/count'
+	//发起异步数据请求
+	let result = await uni.request({
+		url,
+	})
+	return result[1].data
+}
+
+// API 修改购物车菜品数量
+export let foodUpdate = async function(name, count) {
+	let url = base + 'food/update'
+	//发起异步数据请求
+	let result = await uni.request({
+		url,
+		...post,
+		data: {
+			name,
+			count
+		}
+	})
+	return result[1].data
+}
+
+// API 通过ID查询购物车商品
+export let ShopByID = async function(id) {
+	let url = base + 'shopById'
+	//发起异步数据请求
+	let result = await uni.request({
+		url,
+		...post,
+		data: {
+			id
+		}
+	})
+	return result[1].data
+}
+
+
+// API 修改购物车商品状态
+export let ShopIselect = async function(isselect, id) {
+	let url = base + 'shop/isselect'
+	//发起异步数据请求
+	let result = await uni.request({
+		url,
+		...post,
+		data: {
+			isselect,
+			id
+		}
+	})
+	return result[1].data
+}
+
+// API 通过购物车商品名字查询详情商品
+export let ShopName = async function(name) {
+	let url = base + 'shop/name'
+	//发起异步数据请求
+	let result = await uni.request({
+		url,
+		...post,
+		data: {
+			name
+		}
+	})
+	return result[1].data
+}
+
+// API 通过商品名称查询是否存在该商品
+export let IsShopName = async function(name) {
+	let url = base + 'isshop/name'
+	//发起异步数据请求
+	let result = await uni.request({
+		url,
+		...post,
+		data: {
+			name
+		}
+	})
+	return result[1].data
+}
+
+// API 通过ID删除购物车商品
+export let ShopDel = async function(id) {
+	let url = base + 'shop/del'
+	//发起异步数据请求
+	let result = await uni.request({
+		url,
+		...post,
+		data: {
+			id
+		}
+	})
+	return result[1].data
+}
