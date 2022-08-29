@@ -95,10 +95,62 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "recyclableRender", function() { return recyclableRender; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "components", function() { return components; });
 var components
+try {
+  components = {
+    uniSwipeAction: function() {
+      return __webpack_require__.e(/*! import() | uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action */ "uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-swipe-action/components/uni-swipe-action/uni-swipe-action.vue */ 112))
+    },
+    uniSwipeActionItem: function() {
+      return Promise.all(/*! import() | uni_modules/uni-swipe-action/components/uni-swipe-action-item/uni-swipe-action-item */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-swipe-action/components/uni-swipe-action-item/uni-swipe-action-item")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-swipe-action/components/uni-swipe-action-item/uni-swipe-action-item.vue */ 117))
+    }
+  }
+} catch (e) {
+  if (
+    e.message.indexOf("Cannot find module") !== -1 &&
+    e.message.indexOf(".vue") !== -1
+  ) {
+    console.error(e.message)
+    console.error("1. 排查组件名称拼写是否正确")
+    console.error(
+      "2. 排查组件是否符合 easycom 规范，文档：https://uniapp.dcloud.net.cn/collocation/pages?id=easycom"
+    )
+    console.error(
+      "3. 若组件不符合 easycom 规范，需手动引入，并在 components 中注册该组件"
+    )
+  } else {
+    throw e
+  }
+}
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var l0 = _vm.__map(_vm.shoppingList, function(item, index) {
+    var $orig = _vm.__get_orig(item)
+
+    var m0 = Boolean(_vm.shoppingList[index].isselect)
+
+    var f0 = _vm._f("num")(item.price)
+
+    return {
+      $orig: $orig,
+      m0: m0,
+      f0: f0
+    }
+  })
+
+  var m1 = Boolean(_vm.isallselect)
+  var g0 = _vm.total.toFixed(2)
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        l0: l0,
+        m1: m1,
+        g0: g0
+      }
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -132,53 +184,190 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 13));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _index = __webpack_require__(/*! @/service/index.js */ 12);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var _default =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {
   data: function data() {
-    return {};
+    return {
+      options: [{
+        text: '删除',
+        style: {
+          backgroundColor: '#f01826' } }],
 
 
+      isselect: false,
+      isallselect: 0,
+      shoppingList: [] //购物车所有菜品列表
+    };
   },
-  methods: {} };exports.default = _default;
+  onLoad: function onLoad() {
+    this.loadAll();
+  },
+  onShow: function onShow() {
+    this.loadAll();
+    this.isallselect = 0;
+  },
+  filters: {
+    num: function num(value) {
+      if (!isNaN(value)) {
+        return (value + '').indexOf('.') != -1 ? value : value.toFixed(2);
+      }
+    } },
+
+  methods: {
+    onClick: function onClick(id) {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:_context.next = 2;return (
+
+
+                  (0, _index.ShopDel)(id));case 2:res = _context.sent;
+                console.log('通过ID删除购物车商品', res);
+                _this.loadAll();
+                uni.showToast({
+                  title: '删除成功',
+                  icon: "none" });case 6:case "end":return _context.stop();}}}, _callee);}))();
+
+    },
+    //点击跳转到详情页
+    goDetail: function goDetail(name) {
+      uni.navigateTo({
+        url: '/pages/foodDetail/foodDetail?name=' + name });
+
+    },
+    //点击加加
+    add: function add(id, name, count, index) {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var res, result;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
+                count += 1;_context2.next = 3;return (
+                  (0, _index.foodUpdate)(name, count));case 3:res = _context2.sent;
+                console.log('点击加加', res);_context2.next = 7;return (
+                  (0, _index.ShopByID)(id));case 7:result = _context2.sent;
+                _this2.shoppingList[index].count = result.data[0].count;case 9:case "end":return _context2.stop();}}}, _callee2);}))();
+    },
+    //点击减减
+    reduce: function reduce(id, name, count, index) {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {var res, result;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:if (!(
+                count > 1)) {_context3.next = 10;break;}
+                count -= 1;_context3.next = 4;return (
+                  (0, _index.foodUpdate)(name, count));case 4:res = _context3.sent;
+                console.log('点击减减', res);_context3.next = 8;return (
+                  (0, _index.ShopByID)(id));case 8:result = _context3.sent;
+                _this3.shoppingList[index].count = result.data[0].count;case 10:case "end":return _context3.stop();}}}, _callee3);}))();
+
+    },
+    //查询购物车所有菜品
+    loadAll: function loadAll() {var _this4 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee4() {var res;return _regenerator.default.wrap(function _callee4$(_context4) {while (1) {switch (_context4.prev = _context4.next) {case 0:_context4.next = 2;return (
+                  (0, _index.foodsShopping)());case 2:res = _context4.sent;
+                console.log('查询购物车所有菜品', res);
+                _this4.shoppingList = res.data;case 5:case "end":return _context4.stop();}}}, _callee4);}))();
+    },
+    //修改购物车状态
+    //单选
+    changes: function changes(index) {
+      if (this.shoppingList[index].isselect == 0) {
+        this.shoppingList[index].isselect = 1;
+        var result = this.shoppingList.every(function (item) {
+          return item.isselect == 1;
+        });
+        if (result) {
+          this.isallselect = 1;
+        }
+      } else {
+        this.shoppingList[index].isselect = 0;
+        this.isallselect = 0;
+      }
+      console.log(this.isallselect);
+    },
+    //全选
+    allselect: function allselect() {var _this5 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee5() {return _regenerator.default.wrap(function _callee5$(_context5) {while (1) {switch (_context5.prev = _context5.next) {case 0:
+                _this5.isallselect = !_this5.isallselect;
+                if (_this5.isallselect == 1) {
+                  _this5.shoppingList.forEach(function (item) {
+                    item.isselect = 1;
+                  });
+                } else {
+                  _this5.shoppingList.forEach(function (item) {
+                    item.isselect = 0;
+                  });
+                }case 2:case "end":return _context5.stop();}}}, _callee5);}))();
+    } },
+
+  computed: {
+    total: function total() {
+      if (this.shoppingList) {
+        return this.shoppingList.reduce(function (sum, value) {return (
+            sum + value.price * value.count * value.isselect);}, 0);
+      }
+    } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

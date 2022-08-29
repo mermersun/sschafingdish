@@ -3,9 +3,13 @@
   "navigationBarTextStyle": "black",
   "navigationBarBackgroundColor": "#fff",
   "backgroundColor": "#fff",
+  "enablePullDownRefresh": true,
+  "onReachBottomDistance": 20,
   "usingComponents": {
+    "ss-go-top": "/components/ssGoTop/ssGoTop",
     "uni-search-bar": "/uni_modules/uni-search-bar/components/uni-search-bar/uni-search-bar",
     "uni-list": "/uni_modules/uni-list/components/uni-list/uni-list",
-    "uni-list-item": "/uni_modules/uni-list/components/uni-list-item/uni-list-item"
+    "uni-list-item": "/uni_modules/uni-list/components/uni-list-item/uni-list-item",
+    "uni-load-more": "/uni_modules/uni-load-more/components/uni-load-more/uni-load-more"
   }
 }

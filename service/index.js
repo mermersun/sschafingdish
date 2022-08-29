@@ -295,3 +295,34 @@ export let ShopDel = async function(id) {
 	})
 	return result[1].data
 }
+
+// API 登录
+export let Login = async function(username, password) {
+	let url = base + 'login'
+	//发起异步数据请求
+	let result = await uni.request({
+		url,
+		...post,
+		data: {
+			username,
+			password
+		}
+	})
+	return result[1].data
+}
+
+// API 注册
+export let Register = async function(username, password, email) {
+	let url = base + 'register'
+	//发起异步数据请求
+	let result = await uni.request({
+		url,
+		...post,
+		data: {
+			username,
+			password,
+			email
+		}
+	})
+	return result[1].data
+}

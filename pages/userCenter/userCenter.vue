@@ -1,10 +1,14 @@
 <template>
 	<view>
-		<uni-swipe-action>
-			<uni-swipe-action-item :right-options="options" @click="onClick">
+		<uni-transition :styles="{position: 'absolute',width:'100%'}" mode-class="slide-left"
+			:show="curComponent==='login'">
+			<Login @showChild="toChild"></Login>
+		</uni-transition>
 
-			</uni-swipe-action-item>
-		</uni-swipe-action>
+		<uni-transition :styles="{position: 'absolute',width:'100%'}" mode-class="slide-right"
+			:show="curComponent==='register'">
+			<Register @showChild="toChild"></Register>
+		</uni-transition>
 	</view>
 </template>
 
@@ -12,32 +16,17 @@
 	export default {
 		data() {
 			return {
-				options: [{
-					text: '取消',
-					style: {
-						backgroundColor: '#007aff'
-					}
-				}, {
-					text: '确认',
-					style: {
-						backgroundColor: '#dd524d'
-					}
-				}]
+				curComponent: 'login'
 			}
 		},
 		methods: {
-			onClick(e) {
-				//点击选项按钮时触发事件	
-				//e = {content,index} ，content（点击内容）、index（下标）、position (位置信息)
-			},
-			swipeChange(e) {
-				//组件打开或关闭时触发	
-				// left:左侧 ，right：右侧，none：关闭
+			toChild(data) {
+				console.log(data.childName);
+				this.curComponent = data.childName
 			}
 		}
 	}
 </script>
 
 <style>
-
 </style>

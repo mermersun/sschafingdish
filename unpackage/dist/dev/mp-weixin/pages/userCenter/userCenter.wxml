@@ -1,1 +1,1 @@
-<view>用户中心</view>
+<uni-transition vue-id="6ff90b00-1" mode-class="fade" show="show" bind:__l="__l" vue-slots="{{['default']}}"><login bind:showChild="__e" vue-id="{{('6ff90b00-2')+','+('6ff90b00-1')}}" data-event-opts="{{[['^showChild',[['toChild']]]]}}" bind:__l="__l"></login></uni-transition>

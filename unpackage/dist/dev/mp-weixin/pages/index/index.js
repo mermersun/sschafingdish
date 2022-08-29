@@ -110,10 +110,10 @@ var components
 try {
   components = {
     ssGoTop: function() {
-      return __webpack_require__.e(/*! import() | components/ssGoTop/ssGoTop */ "components/ssGoTop/ssGoTop").then(__webpack_require__.bind(null, /*! @/components/ssGoTop/ssGoTop.vue */ 60))
+      return __webpack_require__.e(/*! import() | components/ssGoTop/ssGoTop */ "components/ssGoTop/ssGoTop").then(__webpack_require__.bind(null, /*! @/components/ssGoTop/ssGoTop.vue */ 62))
     },
     uniCard: function() {
-      return __webpack_require__.e(/*! import() | uni_modules/uni-card/components/uni-card/uni-card */ "uni_modules/uni-card/components/uni-card/uni-card").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-card/components/uni-card/uni-card.vue */ 67))
+      return __webpack_require__.e(/*! import() | uni_modules/uni-card/components/uni-card/uni-card */ "uni_modules/uni-card/components/uni-card/uni-card").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-card/components/uni-card/uni-card.vue */ 69))
     }
   }
 } catch (e) {
@@ -137,6 +137,37 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var l0 = _vm.__map(_vm.foodAllList, function(item, index) {
+    var $orig = _vm.__get_orig(item)
+
+    var f0 = _vm._f("num")(item.price)
+
+    return {
+      $orig: $orig,
+      f0: f0
+    }
+  })
+
+  var l1 = _vm.__map(_vm.foodList, function(item, index) {
+    var $orig = _vm.__get_orig(item)
+
+    var f1 = _vm._f("num")(item.price)
+
+    return {
+      $orig: $orig,
+      f1: f1
+    }
+  })
+
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        l0: l0,
+        l1: l1
+      }
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -168,70 +199,198 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 13));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _index = __webpack_require__(/*! @/service/index.js */ 12);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var _default =
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {
   data: function data() {
     return {
-      title: 'Hello' };
-
+      activenum: 1, //激活标签
+      foodAllList: [], //所有菜品
+      foodList: [] //筛选菜品
+    };
   },
-  onLoad: function onLoad() {
-
+  onLoad: function onLoad() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+              _this.recommend();
+              //加载所有菜品
+              _context.next = 3;return (0, _index.foods)();case 3:res = _context.sent;
+              console.log('所有菜品', res);
+              _this.foodAllList = res.data;case 6:case "end":return _context.stop();}}}, _callee);}))();
   },
-  methods: {} };exports.default = _default;
+  filters: {
+    num: function num(value) {
+      if (!isNaN(value)) {
+        return (value + '').indexOf('.') != -1 ? value : value.toFixed(2);
+      }
+    } },
+
+  methods: {
+    //点击加入购物车
+    buttonClick: function buttonClick(index, name) {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var result, count, res, _res;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:_context2.next = 2;return (
+
+                  (0, _index.IsShopName)(name));case 2:result = _context2.sent;
+                console.log('通过商品名称查询是否存在该商品', result);if (!
+                result.data.length) {_context2.next = 12;break;}
+                count = result.data[0].count + 1;_context2.next = 8;return (
+                  (0, _index.foodUpdate)(name, count++));case 8:res = _context2.sent;
+                uni.showToast({
+                  title: '添加成功',
+                  icon: "none" });_context2.next = 16;break;case 12:_context2.next = 14;return (
+
+
+                  (0, _index.foodAdd)(_this2.foodList[index].picture, _this2.foodList[index].name, _this2.foodList[
+                  index].
+                  price, _this2.
+                  foodList[index].orprice, _this2.foodList[index].tagline, 1));case 14:_res = _context2.sent;
+                console.log('点击加入购物车', _res);case 16:case "end":return _context2.stop();}}}, _callee2);}))();
+
+    },
+
+    //点击跳转到详情页
+    goDetail: function goDetail(name) {
+      uni.navigateTo({
+        url: '/pages/foodDetail/foodDetail?name=' + name });
+
+      // console.log(id);
+    },
+    //显示无套餐
+    empty: function empty() {
+      uni.showToast({
+        title: '暂无套餐',
+        icon: 'error' });
+
+    },
+    //店长推荐
+    recommend: function recommend() {var _this3 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {var res;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:_context3.next = 2;return (
+                  (0, _index.foodsRecommend)());case 2:res = _context3.sent;
+                console.log('店长推荐', res);
+                _this3.foodList = res.data;
+                _this3.activenum = 1;case 6:case "end":return _context3.stop();}}}, _callee3);}))();
+    },
+    //类型小吃
+    type1: function type1() {var _this4 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee4() {var res;return _regenerator.default.wrap(function _callee4$(_context4) {while (1) {switch (_context4.prev = _context4.next) {case 0:_context4.next = 2;return (
+                  (0, _index.foodsType)('小吃'));case 2:res = _context4.sent;
+                console.log('小吃', res);
+                _this4.foodList = res.data;
+                _this4.activenum = 2;case 6:case "end":return _context4.stop();}}}, _callee4);}))();
+    },
+    //类型荤菜
+    type2: function type2() {var _this5 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee5() {var res;return _regenerator.default.wrap(function _callee5$(_context5) {while (1) {switch (_context5.prev = _context5.next) {case 0:_context5.next = 2;return (
+                  (0, _index.foodsType)('荤菜'));case 2:res = _context5.sent;
+                console.log('荤菜', res);
+                _this5.foodList = res.data;
+                _this5.activenum = 3;case 6:case "end":return _context5.stop();}}}, _callee5);}))();
+    } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 /* 22 */

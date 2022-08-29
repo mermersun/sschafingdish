@@ -27,7 +27,7 @@
 .go-top {
   z-index: 10;
   position: fixed;
-  right: 15rpx;
+  right: 20rpx;
   bottom: 150rpx;
   border: 1px solid #c8c7cc;
   border-radius: 50%;

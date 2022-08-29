@@ -3,9 +3,11 @@
 		<view class="top">
 			<view>
 				<image src="../../static/img/tx.jpg" mode="widthFix"></image>
+				<!-- 				<view>
+					<text style="display: block;">这里是昵称</text>
+					<text>id：1234567</text>
+				</view> -->
 				<view>
-					<!-- <text style="display: block;">这里是昵称</text>
-					<text>id：1234567</text> -->
 					<text @click="goLogin">登录</text>
 					<text>|</text>
 					<text @click="goRegister">注册</text>
